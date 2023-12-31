@@ -65,3 +65,15 @@ function getRandomPositionValue(boardSize) {
 function poistionsMatch(a, b) {
   return (a.x === b.x && a.y === b.y);
 }
+
+export function checkLoose(board) {
+  return board.some(row => {
+    return row.some(tile => tile.tileElStatus === TILE_STATUSES.MINE)
+  })
+}
+
+export function checkWin(board) {
+  return board.every(row => {
+    return row.every(tile => (tile.tileElStatus === TILE_STATUSES.NUMBER) || tile.hasMine && (tile.tileElStatus === TILE_STATUSES.MARKED || tile.tileElStatus === TILE_STATUSES.HIDDEN))
+  })
+}
